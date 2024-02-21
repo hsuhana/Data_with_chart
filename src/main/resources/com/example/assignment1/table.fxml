@@ -14,8 +14,8 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="83.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToPieChart" text="Pie Chart" />
-      <Button layoutX="214.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToBarChart" text="Bar Chart" />
+      <Button layoutX="103.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToPieChart" text="Pie Chart" />
+      <Button layoutX="187.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToBarChart" text="Bar Chart" />
       <TableView fx:id="table" layoutX="32.0" layoutY="141.0" prefHeight="384.0" prefWidth="290.0">
         <columns>
           <TableColumn fx:id="table_rank" prefWidth="50.0" text="RANK" />

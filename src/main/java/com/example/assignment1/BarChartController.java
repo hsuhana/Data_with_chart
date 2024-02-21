@@ -55,10 +55,8 @@ public class BarChartController implements Initializable {
         stage.show();
     }
 
-    //DatabaseConnector dbConnector = new DatabaseConnector();
-
     public ObservableList<Country> loadData(){
-        //Connection connection = dbConnector.connect();
+
         ObservableList<Country> countries = FXCollections.observableArrayList();
         try {
             Connection connection = DatabaseConnector.connect();
@@ -78,17 +76,15 @@ public class BarChartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb){
 
-//      ObservableList<Country> countries = loadData();
-//      XYChart.Series<String, Integer> series = new XYChart.Series<>();
-//      for (Country country : countries) {
-//          series.getData().add(new XYChart.Data<>(country.getTable_country(), country.getTable_visitors()));
-//      }
-//      barChart.getData().addAll(series);
         ObservableList<Country> countries = loadData();
         populateBarChart(countries);
     }
 
     private void populateBarChart(ObservableList<Country> countries){
-
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
+        for(Country country : countries){
+            series.getData().add(new XYChart.Data<>(country.getTable_country(), country.getTable_visitors()));
+        }
+        barChart.getData().addAll(series);
     }
 }

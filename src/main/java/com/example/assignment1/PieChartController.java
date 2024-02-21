@@ -3,19 +3,30 @@ package com.example.assignment1;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
-public class PieChartController {
+public class PieChartController implements Initializable {
+
+    @FXML
+    private PieChart pieChart;
+
     //toggle to different charts
     private Stage stage;
     private Scene scene;
@@ -37,21 +48,38 @@ public class PieChartController {
         stage.show();
     }
 
-    DatabaseConnector dbConnector = new DatabaseConnector();
-
     public ObservableList<Country> loadData(){
-        Connection connection = dbConnector.connect();
-        ObservableList<Country> country = FXCollections.observableArrayList();
+
+        ObservableList<Country> countries = FXCollections.observableArrayList();
         try {
+            Connection connection = DatabaseConnector.connect();
+            //PreparedStatement statement = connection.prepareStatement("SELECT * FROM top_10_most_visited_countries");
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM top_10_most_visited_countries");
 
             while (resultSet.next()){
-                country.add(new Country(resultSet.getInt("ranks"), resultSet.getString("country_name"), resultSet.getInt("visitor_number")));
+                countries.add(new Country(resultSet.getString("country_name"), resultSet.getInt("visitor_number")));
             }
         } catch (SQLException e){
             e.printStackTrace();
         }
-        return country;
+        return countries;
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+
+        ObservableList<Country> countries = loadData();
+        populatePieChart(countries);
+    }
+
+    private void populatePieChart(ObservableList<Country> countries){
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (Country country : countries) {
+            pieChartData.add(new PieChart.Data(country.getTable_country(), country.getTable_visitors()));
+        }
+        pieChart.setData(pieChartData);
+    }
+
 }
+
