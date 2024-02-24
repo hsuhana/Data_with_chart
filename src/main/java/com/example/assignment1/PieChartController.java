@@ -1,5 +1,6 @@
 package com.example.assignment1;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,13 +74,54 @@ public class PieChartController implements Initializable {
         populatePieChart(countries);
     }
 
+//    private void populatePieChart(ObservableList<Country> countries){
+//        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+//        for (Country country : countries) {
+//            pieChartData.add(new PieChart.Data(country.getTable_country(), country.getTable_visitors()));
+//        }
+//        pieChart.setData(pieChartData);
+//
+//
+//    }
+
     private void populatePieChart(ObservableList<Country> countries){
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
         for (Country country : countries) {
             pieChartData.add(new PieChart.Data(country.getTable_country(), country.getTable_visitors()));
         }
+
         pieChart.setData(pieChartData);
+
+        String[] segmentColors = {
+                "#457782",
+                "#B5EBD7",
+                "#968868",
+                "#EBDBB5",
+                "#B4E1EB",
+                "#A4E3AE",
+                "#EBCEB5",
+                "#85A4AB",
+                "#967E68",
+                "#689685"
+        };
+
+        // Apply custom colors after the PieChart has been rendered
+        Platform.runLater(() -> {
+            for (int i = 0; i < pieChartData.size(); i++) {
+                PieChart.Data data = pieChartData.get(i);
+                Node node = data.getNode();
+                if (node != null) {
+                    String style = "-fx-pie-color: " + segmentColors[i] + ";";
+                    node.setStyle(style);
+                }
+            }
+
+            pieChart.setStyle("-fx-legend-visible: false;");
+        });
     }
+
+
 
 }
 

@@ -1,5 +1,6 @@
 package com.example.assignment1;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -86,5 +84,30 @@ public class BarChartController implements Initializable {
             series.getData().add(new XYChart.Data<>(country.getTable_country(), country.getTable_visitors()));
         }
         barChart.getData().addAll(series);
+
+        String[] segmentColors = {
+                "#457782",
+                "#B5EBD7",
+                "#968868",
+                "#EBDBB5",
+                "#B4E1EB",
+                "#A4E3AE",
+                "#EBCEB5",
+                "#85A4AB",
+                "#967E68",
+                "#689685"
+        };
+
+        // Apply custom colors after the PieChart has been rendered
+        Platform.runLater(() -> {
+            for (int i = 0; i < series.getData().size(); i++) {
+                XYChart.Data<String, Integer> data = series.getData().get(i);
+                String color = segmentColors[i % segmentColors.length]; // Use modulus to loop through colors
+                Node node = data.getNode();
+                if (node != null) {
+                    node.setStyle("-fx-bar-fill: " + color + ";");
+                }
+            }
+        });
     }
 }

@@ -68,13 +68,13 @@ public class TableController implements Initializable {
         stage.show();
     }
 
-    public void switchToTable (ActionEvent event) throws IOException{
-        root = FXMLLoader.load(getClass().getResource("table.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+//    public void switchToTable (ActionEvent event) throws IOException{
+//        root = FXMLLoader.load(getClass().getResource("table.fxml"));
+//        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
+//    }
 
     DatabaseConnector dbConnector = new DatabaseConnector();
 

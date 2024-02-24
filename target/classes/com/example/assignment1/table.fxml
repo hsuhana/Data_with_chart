@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment1.TableController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="353.0" styleClass="anchorPane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.assignment1.TableController">
    <children>
-      <Label layoutX="29.0" layoutY="9.0" prefHeight="136.0" prefWidth="299.0" text="Top 10 Most Visited Countries Around The World In 2022" textAlignment="CENTER" wrapText="true">
+      <Label layoutX="29.0" layoutY="9.0" prefHeight="136.0" prefWidth="299.0" styleClass="label" text="Top 10 Most Visited Countries Around The World In 2022" textAlignment="CENTER" textFill="#5682ae" wrapText="true">
          <font>
-            <Font size="24.0" />
+            <Font name="Yuanti TC Bold" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="103.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToPieChart" text="Pie Chart" />
-      <Button layoutX="187.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToBarChart" text="Bar Chart" />
+      <Button fx:id="pieChartButton" layoutX="83.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToPieChart" text="Pie Chart" />
+      <Button fx:id="barChartButton" layoutX="187.0" layoutY="547.0" mnemonicParsing="false" onAction="#switchToBarChart" text="Bar Chart" />
       <TableView fx:id="table" layoutX="32.0" layoutY="141.0" prefHeight="384.0" prefWidth="290.0">
         <columns>
           <TableColumn fx:id="table_rank" prefWidth="50.0" text="RANK" />

@@ -3,9 +3,11 @@ package com.example.assignment1;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 public class Application extends javafx.application.Application {
 //    @Override
@@ -24,11 +26,19 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage){
         try{
+
             Parent root = FXMLLoader.load(getClass().getResource("table.fxml"));
             Scene scene = new Scene(root);
 
-            //Image icon = new Image("path of the icon"); It must be inside src folder.
-            //stage.getIcons().add(icon);
+            //import css
+            //scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+            Image icon = new Image("https://cdn-icons-png.freepik.com/512/826/826070.png?ga=GA1.1.1852331970.1708719654&"); //It must be inside src folder
+            //Image icon = new Image(getClass().getResource("/travel.png").toExternalForm());
+            //Image icon = new Image(getClass().getResourceAsStream("/travel.jpg"));
+
+
+            stage.getIcons().add(icon);
             stage.setTitle("The Top 10 Most Visited Countries in 2022");
             //stage.setWidth(420);
             //stage.setHeight(420);
